@@ -31,7 +31,7 @@ LA_LOCALS = [
     ("KABC-DT", "ABC 7 Los Angeles", ["ABC Los Angeles", "ABC LA", "ABC7"]),
     ("KCAL-DT", "KCAL 9 Los Angeles", ["KCAL 9", "KCAL News"]),
     ("KTTV-DT", "FOX 11 Los Angeles", ["FOX Los Angeles", "FOX LA", "Fox 11"]),
-    ("KCOP-DT", "MyNetworkTV 13 Los Angeles", ["KCOP 13", "My 13", "MyNetworkTV Los Angeles"]),
+    ("KCOP-DT", "MyNetworkTV 13 Los Angeles", ["KCOP 13", "My 13", "MyNetworkTV Los Angeles", "MY13", "MY13 (KCOP)", "US: MY13 (KCOP) Los Angeles, CA", "US: MY13 (KCOP) Los Angeles"]),
     ("KSCI-DT", "KSCI 18 Los Angeles", []),
     ("KCET-DT", "KCET 28 Los Angeles", ["PBS SoCal Plus", "KCET"]),
     ("KPXN-DT", "ION 30 Los Angeles", ["ION Los Angeles"]),
