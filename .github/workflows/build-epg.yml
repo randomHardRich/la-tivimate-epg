@@ -1,0 +1,29 @@
+name: Build EPG
+
+on:
+  schedule:
+    - cron: "17 10 * * *" # daily, about 3 AM Los Angeles time
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 build_epg.py --output epg.xml.gz
+      # The guide lives on its own one-commit branch so the repo doesn't grow every day.
+      - name: Publish to the guide branch
+        run: |
+          git config user.name "epg-bot"
+          git config user.email "epg-bot@users.noreply.github.com"
+          git checkout --orphan guide
+          git rm -rfq --cached .
+          git add -f epg.xml.gz
+          git commit -qm "Update guide"
+          git push -f origin guide
