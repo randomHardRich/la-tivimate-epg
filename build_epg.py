@@ -54,6 +54,9 @@ LA_LOCALS = [
     ("KPOM-CD", "KPOM Los Angeles", []),
 ]
 
+# Playlist tvg-ids that don't match ours; each station is listed again under that id.
+PROVIDER_IDS = {"KCOP-DT": "MYTV LOS ANGELES CA KCOP"}
+
 # LA-area cable and sports channels, by their exact name in the source guide.
 LA_REGIONAL = {
     "Spectrum News 1 - SO CAL - STVA": "Spectrum News 1 SoCal",
@@ -232,6 +235,14 @@ def main():
             listings.update(new_listings)
 
     channels = [(out_id, names) for out_id, names in wanted.values() if out_id in listings]
+    for station, extra_id in PROVIDER_IDS.items():
+        out_id, names = wanted[station]
+        if out_id in listings:
+            channels.append((extra_id, names))
+            icons[extra_id] = icons.get(out_id, "")
+            listings[extra_id] = [
+                p.replace(f'channel="{out_id}"', f"channel={quoteattr(extra_id)}", 1) for p in listings[out_id]
+            ]
     absent = [source for source, (out_id, _) in wanted.items() if out_id not in listings]
     programmes = sum(len(v) for v in listings.values())
     print(f"{len(channels)} channels, {programmes} programmes", file=sys.stderr)
